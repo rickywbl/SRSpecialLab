@@ -27,7 +27,6 @@
         self.textContainerInset = UIEdgeInsetsMake(0, -5, 0, -5);
         //必须设置
         self.scrollEnabled = NO;
-        
         //设置UITextView为不能编辑状态
         self.editable = NO;
 
@@ -49,8 +48,16 @@
  *  计算出每个有链接的字符串的CGRect
  */
 -(void)setUpSRSpecial{
+    
+    
+    NSString *text =[NSString stringWithFormat:@"%@",self.attributedText.string];
+    
+    
 
     for (SRSpecialObj *point in self.specials ) {
+        
+        
+        point.range = [text rangeOfString:point.text];
         
         self.selectedRange = point.range;
         NSArray * selectionRects = [self selectionRectsForRange:self.selectedTextRange];
@@ -105,6 +112,8 @@
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    NSLog(@"touchesBegan1");
  
     [self setUpSRSpecial];
 
@@ -120,7 +129,7 @@
         
         UIView *cover =[[UIView alloc]init];
         
-        cover.backgroundColor =[UIColor redColor];
+        cover.backgroundColor = point.HLBackgroundColor;
         
         cover.frame = rectValue.CGRectValue;
         
@@ -150,6 +159,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self touchesCancelled:touches withEvent:event];
     });
+
 }
 
 

@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 @interface SRSpecialObj : NSObject
 
 @property(nonatomic,copy)NSString *text;
 @property(nonatomic,assign)NSRange range;
 @property(nonatomic,strong)NSArray *rects;
-
+@property(nonatomic,strong)UIColor *HLBackgroundColor;
 @end
